@@ -8,11 +8,6 @@
 
 import UIKit
 
-enum JCDemoType {
-    case pdf
-    case image
-}
-
 
 let annotationReuseIdentifier = "JCAnnotationReuseIdentifier";
 let SkippingGirlImageName = "SkippingGirl"
@@ -21,9 +16,6 @@ let SkippingGirlImageSize = CGSize(width: 1000, height: 1000)
 class HomeViewController: UIViewController, JCTiledScrollViewDelegate, JCTileSource {
     
     var scrollView: JCTiledScrollView!
-    var infoLabel: UILabel!
-    var searchField: UITextField!
-    var mode: JCDemoType!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,39 +31,19 @@ class HomeViewController: UIViewController, JCTiledScrollViewDelegate, JCTileSou
         // totals 4 sets of tiles across all devices, retina devices will miss out on the first 1x set
         scrollView.levelsOfZoom = 2;
         scrollView.levelsOfDetail = 2;
-    
-        
-        
         view.addSubview(scrollView)
-        
-//        let paddingX:CGFloat = 0;
-//        let paddingY:CGFloat = 0;
-//        infoLabel = UILabel(frame: CGRect(x: paddingX, y: paddingY, width: self.view.bounds.size.width - 2*paddingX, height: 30));
-//        infoLabel.backgroundColor = UIColor.black
-//        infoLabel.textColor = UIColor.white
-//        infoLabel.textAlignment = NSTextAlignment.center
-//        view.addSubview(infoLabel)
         
         
         let a:JCAnnotation = DemoAnnotation();
-        a.contentPosition = CGPoint(x: 390.0,y: 250.0)
+        a.contentPosition = CGPoint(x: 390.0,y: 265.0)
         
         scrollView.add(a);
         
-        addRandomAnnotations()
-    }
-    
-    func tiledScrollViewDidScroll(_ scrollView: JCTiledScrollView!) {
-//        scrollView.con
-    }
-    
-    private func scrollViewDidScroll(scrollView: UIScrollView) {
-        if scrollView.contentOffset.y < 0 {
-            scrollView.contentOffset.y = 0
-        }
+        //addRandomAnnotations()
     }
     
     
+    //Add marker
     func addRandomAnnotations() {
         for _ in 0...4 {
             let a:JCAnnotation = DemoAnnotation();
@@ -84,7 +56,7 @@ class HomeViewController: UIViewController, JCTiledScrollViewDelegate, JCTileSou
         }
     }
     
-    
+    //Get position
     func tiledScrollView(_ scrollView: JCTiledScrollView!, didReceiveSingleTap gestureRecognizer: UIGestureRecognizer!) {
         
         let tapPoint:CGPoint = gestureRecognizer.location(in: scrollView.tiledView)
@@ -92,15 +64,7 @@ class HomeViewController: UIViewController, JCTiledScrollViewDelegate, JCTileSou
         navigationItem.title = infoString
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     //Don't touch this function
     func tiledScrollView(_ scrollView: JCTiledScrollView!, viewFor annotation: JCAnnotation!) -> JCAnnotationView! {
         
